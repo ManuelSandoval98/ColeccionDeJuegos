@@ -31,13 +31,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CfE-9w-reS">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8OC-w8-xmN">
-                            <connections>
-                                <segue destination="m5e-P5-T4R" kind="show" id="w9X-f4-B6g"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="8OC-w8-xmN">
+                                <connections>
+                                    <segue destination="m5e-P5-T4R" kind="show" identifier="juegoSegue" id="w9X-f4-B6g"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Editar" id="m4s-KN-nyy">
+                                <connections>
+                                    <action selector="editarBotonTapped:" destination="BYZ-38-t0r" id="Fer-sR-Su7"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editarBoton" destination="m4s-KN-nyy" id="eTu-Mb-uMe"/>
                         <outlet property="tableView" destination="Wvx-91-HFd" id="62u-cg-jYb"/>
                     </connections>
                 </viewController>
@@ -66,11 +74,22 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KU4-1e-Ph3">
-                                <rect key="frame" x="169" y="344" width="76" height="31"/>
+                                <rect key="frame" x="169" y="562" width="76" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Agregar"/>
                                 <connections>
                                     <action selector="agregarTapped:" destination="m5e-P5-T4R" eventType="touchUpInside" id="HTc-f6-bVe"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9dn-Se-VQc">
+                                <rect key="frame" x="20" y="338" width="374" height="157"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBZ-W3-4AA">
+                                <rect key="frame" x="169" y="611" width="76" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Eliminar"/>
+                                <connections>
+                                    <action selector="eliminarTapped:" destination="m5e-P5-T4R" eventType="touchUpInside" id="luF-LB-HEn"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -78,11 +97,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="lEZ-oc-517" firstAttribute="centerX" secondItem="mRr-QK-bsM" secondAttribute="centerX" id="FAj-OU-CVZ"/>
+                            <constraint firstItem="KU4-1e-Ph3" firstAttribute="top" secondItem="9dn-Se-VQc" secondAttribute="bottom" constant="8" symbolic="YES" id="KpN-ZZ-mxy"/>
+                            <constraint firstItem="9dn-Se-VQc" firstAttribute="top" secondItem="mRr-QK-bsM" secondAttribute="bottom" constant="14" id="LHt-x7-c5i"/>
                             <constraint firstItem="lEZ-oc-517" firstAttribute="top" secondItem="8he-bM-yge" secondAttribute="top" constant="32" id="Ne8-Rm-cn6"/>
                             <constraint firstItem="lEZ-oc-517" firstAttribute="width" secondItem="mRr-QK-bsM" secondAttribute="width" id="UFq-hx-7IO"/>
-                            <constraint firstItem="KU4-1e-Ph3" firstAttribute="top" secondItem="mRr-QK-bsM" secondAttribute="bottom" constant="20" id="ltu-7n-P8K"/>
+                            <constraint firstItem="9dn-Se-VQc" firstAttribute="centerX" secondItem="KU4-1e-Ph3" secondAttribute="centerX" id="Y3g-a6-0SR"/>
+                            <constraint firstItem="KU4-1e-Ph3" firstAttribute="centerX" secondItem="zBZ-W3-4AA" secondAttribute="centerX" id="g4J-5B-fLU"/>
+                            <constraint firstItem="mRr-QK-bsM" firstAttribute="centerX" secondItem="9dn-Se-VQc" secondAttribute="centerX" id="kzk-CI-Bk8"/>
+                            <constraint firstItem="zBZ-W3-4AA" firstAttribute="top" secondItem="KU4-1e-Ph3" secondAttribute="bottom" constant="18" id="ooZ-8w-GOj"/>
                             <constraint firstItem="lEZ-oc-517" firstAttribute="centerX" secondItem="Q7h-oY-uGH" secondAttribute="centerX" id="ozq-UU-JJW"/>
-                            <constraint firstItem="mRr-QK-bsM" firstAttribute="centerX" secondItem="KU4-1e-Ph3" secondAttribute="centerX" id="usW-Wl-fhJ"/>
                             <constraint firstItem="mRr-QK-bsM" firstAttribute="top" secondItem="lEZ-oc-517" secondAttribute="bottom" constant="20" id="y9y-8w-KPO"/>
                         </constraints>
                     </view>
@@ -102,12 +125,15 @@
                     </navigationItem>
                     <connections>
                         <outlet property="JuegoImageView" destination="lEZ-oc-517" id="LO7-WO-H1N"/>
+                        <outlet property="agregarActualizarBoton" destination="KU4-1e-Ph3" id="ff6-yD-wkU"/>
+                        <outlet property="categoriaPickerView" destination="9dn-Se-VQc" id="krY-In-LZE"/>
+                        <outlet property="eliminarBoton" destination="zBZ-W3-4AA" id="IeN-HF-1fV"/>
                         <outlet property="tituloTextField" destination="mRr-QK-bsM" id="p3C-5W-5Aj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bs3-9N-7zM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="961" y="92"/>
+            <point key="canvasLocation" x="960.86956521739137" y="91.741071428571431"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JqD-6c-mWD">
